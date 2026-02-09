@@ -16,6 +16,49 @@
   tick();
 })();
 
+// ── Email Signup ──
+document.querySelectorAll('form[data-signup]').forEach(form => {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button');
+    const input = form.querySelector('input[name="email"]');
+    const email = input.value.trim();
+    if (!email) return;
+    
+    btn.disabled = true;
+    btn.textContent = 'Joining...';
+    
+    try {
+      const res = await fetch('https://neverforgether.co/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'landing-page' })
+      });
+      const data = await res.json();
+      if (data.success) {
+        input.value = '';
+        btn.textContent = '✓ You\'re In!';
+        btn.style.background = '#27ae60';
+        setTimeout(() => {
+          btn.textContent = 'Join the Waitlist';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 3000);
+      } else {
+        throw new Error(data.error || 'Failed');
+      }
+    } catch (err) {
+      btn.textContent = 'Try Again';
+      btn.style.background = '#c0392b';
+      btn.disabled = false;
+      setTimeout(() => {
+        btn.textContent = 'Join the Waitlist';
+        btn.style.background = '';
+      }, 2000);
+    }
+  });
+});
+
 // ── Scroll fade-in ──
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
