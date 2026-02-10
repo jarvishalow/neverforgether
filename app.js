@@ -36,6 +36,8 @@ document.querySelectorAll('form[data-signup]').forEach(form => {
       });
       const data = await res.json();
       if (data.success) {
+        // Fire Meta Pixel Lead event
+        if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'waitlist_signup' });
         input.value = '';
         btn.textContent = '✓ You\'re In!';
         btn.style.background = '#27ae60';
