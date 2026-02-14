@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rudi Garcia — Elite Fitness & Mindset Coaching</title>
+  <meta name="description" content="I help men working long hours get visibly lean and muscular in under 90 days. 1:1 coaching by Rudi Garcia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface2: #1a1a1a;
+      --accent: #ff4d00;
+      --accent2: #ff6b2b;
+      --text: #f5f5f5;
+      --text-muted: #999;
+      --gold: #d4a853;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.65rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+    .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,77,0,0.08) 0%, transparent 60%);
+    }
+
+    .hero-inner { max-width: 800px; position: relative; z-index: 1; }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255,77,0,0.12);
+      border: 1px solid rgba(255,77,0,0.25);
+      color: var(--accent);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      letter-spacing: -2px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero .subhead {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 550px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 25px rgba(255,77,0,0.3);
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 35px rgba(255,77,0,0.4); }
+
+    .hero-sub {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Stats bar */
+    .stats-bar {
+      background: var(--surface);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 3rem 2rem;
+    }
+    .stats-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 0.3rem;
+    }
+
+    /* Sections */
+    section { position: relative; z-index: 1; }
+
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+    }
+
+    /* Problem / Solution */
+    .problem {
+      padding: 6rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .problem-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .problem-card.solution { border-color: rgba(255,77,0,0.2); }
+
+    .problem-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .problem-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .problem-card ul li {
+      padding: 0.5rem 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .problem-card ul li:last-child { border: none; }
+    .problem-card.solution ul li { color: var(--text); }
+
+    /* How it works */
+    .how {
+      padding: 6rem 2rem;
+      background: var(--surface);
+    }
+    .how-inner { max-width: 900px; margin: 0 auto; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .step {
+      background: var(--surface2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .step:hover { transform: translateY(-4px); }
+    .step-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
+      opacity: 0.5;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .step h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .step p { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 6rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .testimonial {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .testimonial .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.8rem; }
+    .testimonial blockquote {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+    .testimonial .author { font-size: 0.85rem; font-weight: 600; }
+    .testimonial .author span { color: var(--text-muted); font-weight: 400; }
+
+    /* CTA */
+    .final-cta {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 100%, rgba(255,77,0,0.08) 0%, transparent 60%);
+    }
+    .final-cta .section-title { margin-bottom: 1.5rem; }
+    .final-cta p {
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #555;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .problem-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .testimonial-grid { grid-template-columns: 1fr; }
+      nav { padding: 1rem 1.2rem; }
+    }
+
+    /* Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">RUDI<span>GARCIA</span></div>
+    <a href="#apply" class="nav-cta">Apply Now</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner fade-up">
+      <div class="badge">🇦🇺 Aussie in Miami · Elite 1:1 Coaching</div>
+      <h1>Get Visibly Lean &<br>Muscular in <em>Under 90 Days</em></h1>
+      <p class="subhead">I help men working long hours build the body they've always wanted — without living in the gym or eating like a rabbit.</p>
+      <a href="#apply" class="hero-cta">Start Your Transformation</a>
+      <p class="hero-sub">Limited spots · Application required</p>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div class="fade-up">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Men Transformed</div>
+      </div>
+      <div class="fade-up">
+        <div class="stat-num">90</div>
+        <div class="stat-label">Day Programs</div>
+      </div>
+      <div class="fade-up">
+        <div class="stat-num">14K+</div>
+        <div class="stat-label">Community</div>
+      </div>
+      <div class="fade-up">
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Client Results</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="problem">
+    <div class="fade-up">
+      <p class="section-label">The Problem</p>
+      <h2 class="section-title">You know what to do.<br>You just can't stay consistent.</h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card fade-up">
+        <h3>❌ Where You Are</h3>
+        <ul>
+          <li>Working 50-60+ hour weeks</li>
+          <li>No energy after work to train</li>
+          <li>Tried every diet, nothing sticks</li>
+          <li>Looking in the mirror and not recognizing yourself</li>
+          <li>Know you're capable of more</li>
+        </ul>
+      </div>
+      <div class="problem-card solution fade-up">
+        <h3>🔥 Where You'll Be</h3>
+        <ul>
+          <li>Lean, muscular physique you're proud of</li>
+          <li>Sustainable nutrition that fits your life</li>
+          <li>Training 4-5x/week with purpose</li>
+          <li>Confidence that bleeds into everything</li>
+          <li>Mental clarity and discipline on lock</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="how-inner">
+      <div class="fade-up">
+        <p class="section-label">The Method</p>
+        <h2 class="section-title">Not another cookie-cutter program.</h2>
+      </div>
+      <div class="steps">
+        <div class="step fade-up">
+          <div class="step-num">01</div>
+          <h3>Deep Dive Assessment</h3>
+          <p>We break down your schedule, nutrition, training history, and goals. No templates — everything is built for you.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">02</div>
+          <h3>Custom Protocol</h3>
+          <p>Training, nutrition, and mindset plan designed around your life. Busy schedule? Travel? We build around it.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">03</div>
+          <h3>Daily Accountability</h3>
+          <p>Direct access to me. Weekly check-ins, form reviews, real-time adjustments. You won't fall off — I won't let you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="fade-up">
+      <p class="section-label">Results</p>
+      <h2 class="section-title">Real men. Real transformations.</h2>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial fade-up">
+        <div class="stars">★★★★★</div>
+        <blockquote>"I lost 30 lbs in 12 weeks while running a company. Rudi didn't just change my body — he rewired how I think about discipline."</blockquote>
+        <div class="author">Jake M. <span>· CEO, 38</span></div>
+      </div>
+      <div class="testimonial fade-up">
+        <div class="stars">★★★★★</div>
+        <blockquote>"I've had trainers before. None of them held me accountable like Rudi. The daily check-ins are a game changer. No hiding."</blockquote>
+        <div class="author">Chris D. <span>· Attorney, 42</span></div>
+      </div>
+      <div class="testimonial fade-up">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Went from 'I'll start Monday' to the best shape of my life. The mindset coaching is what separates Rudi from everyone else."</blockquote>
+        <div class="author">Marcus R. <span>· Finance, 35</span></div>
+      </div>
+      <div class="testimonial fade-up">
+        <div class="stars">★★★★★</div>
+        <blockquote>"My wife noticed in 3 weeks. My team noticed in 6. I wish I'd started a year ago. Don't wait like I did."</blockquote>
+        <div class="author">Daniel K. <span>· Founder, 44</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta" id="apply">
+    <div class="fade-up">
+      <p class="section-label">Ready?</p>
+      <h2 class="section-title">Stop thinking about it.<br>Start becoming it.</h2>
+      <p>DM me "WORK" on Instagram to apply for 1:1 coaching. Limited spots each month.</p>
+      <a href="https://instagram.com/rudigarciaa" class="hero-cta" target="_blank">DM on Instagram →</a>
+      <p class="hero-sub" style="margin-top:1rem;">@rudigarciaa · Aussie in Miami 🇦🇺</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Rudi Garcia Coaching. All rights reserved. &nbsp;·&nbsp; <a href="https://instagram.com/rudigarciaa" target="_blank">@rudigarciaa</a></p>
+  </footer>
+
+  <script>
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
